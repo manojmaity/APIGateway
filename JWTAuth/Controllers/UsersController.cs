@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace JWTAuth.Controllers
 {
     [Route("[controller]")]
+    [Produces("application/json")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -22,6 +23,8 @@ namespace JWTAuth.Controllers
         }
 
         [HttpPost("authenticate")]
+        [ProducesResponseType(typeof(IActionResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public IActionResult Authenticate(AuthenticateRequest model)
         {
             var response = _userService.Authenticate(model);
